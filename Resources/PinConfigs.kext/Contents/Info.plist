@@ -11130,6 +11130,96 @@
 					<key>WakeVerbReinit</key>
 					<true/>
 				</dict>
+				<dict>
+					<key>AFGLowPowerState</key>
+					<data>AwAAAA==</data>
+					<key>CodecID</key>
+					<integer>283902597</integer>
+					<key>CodecName</key>
+					<string>GU603ZM ALC285 layout 93, minimal four-channel DSP</string>
+					<key>ConfigData</key>
+					<data>AScccAEnHQEBJx6mAScfkAE3HPABNx0AATceAAE3H0ABRxxAAUcdAQFHHhcBRx+QAUcMAgFnHPABZx0AAWceAAFnH0ABdxxBAXcdAQF3HhcBdx+QAYcc8AGHHQABhx4AAYcfQAGXHCABlx0QAZceiwGXHwIBpxzwAacdAAGnHgABpx9AAbcc8AG3HQABtx4AAbcfQAG3DAIB1xzwAdcdAAHXHgAB1x9AAecc8AHnHQAB5x4AAecfQAIXHFACFx0QAhceKwIXHwICFwwC</data>
+					<key>FuncGroup</key>
+					<integer>1</integer>
+					<key>LayoutID</key>
+					<integer>93</integer>
+					<key>WakeConfigData</key>
+					<data>AUcMAgG3DAICFwwC</data>
+					<key>WakeVerbReinit</key>
+					<true/>
+				</dict>
+				<dict>
+					<key>AFGLowPowerState</key>
+					<data>AwAAAA==</data>
+					<key>CodecID</key>
+					<integer>283902597</integer>
+					<key>CodecName</key>
+					<string>GU603ZM ALC285 layout 94, firmware headphone pin</string>
+					<key>ConfigData</key>
+					<data>AScccAEnHQEBJx6mAScfkAE3HPABNx0AATceAAE3H0ABRxxAAUcdAQFHHhcBRx+QAUcMAgFnHPABZx0AAWceAAFnH0ABdxxBAXcdAQF3HhcBdx+QAYcc8AGHHQABhx4AAYcfQAGXHCABlx0QAZceiwGXHwIBpxzwAacdAAGnHgABpx9AAbcc8AG3HQABtx4AAbcfQAG3DAIB1xzwAdcdAAHXHgAB1x9AAecc8AHnHQAB5x4AAecfQAIXHDACFx0QAhceIQIXHwMCFwwC</data>
+					<key>FuncGroup</key>
+					<integer>1</integer>
+					<key>LayoutID</key>
+					<integer>94</integer>
+					<key>WakeConfigData</key>
+					<data>AUcMAgG3DAICFwwC</data>
+					<key>WakeVerbReinit</key>
+					<true/>
+				</dict>
+				<dict>
+					<key>AFGLowPowerState</key>
+					<data>AwAAAA==</data>
+					<key>CodecID</key>
+					<integer>283902597</integer>
+					<key>CodecName</key>
+					<string>GU603ZM ALC285 layout 95, shared stereo speaker DAC</string>
+					<key>ConfigData</key>
+					<data>AScccAEnHQEBJx6mAScfkAE3HPABNx0AATceAAE3H0ABRxxAAUcdAQFHHhcBRx+QAUcMAgFnHPABZx0AAWceAAFnH0ABdxxBAXcdAQF3HhcBdx+QAYcc8AGHHQABhx4AAYcfQAGXHCABlx0QAZceiwGXHwIBpxzwAacdAAGnHgABpx9AAbcc8AG3HQABtx4AAbcfQAG3DAIB1xzwAdcdAAHXHgAB1x9AAecc8AHnHQAB5x4AAecfQAIXHDACFx0QAhceIQIXHwMCFwwC</data>
+					<key>FuncGroup</key>
+					<integer>1</integer>
+					<key>LayoutID</key>
+					<integer>95</integer>
+					<key>WakeConfigData</key>
+					<data>AUcMAgG3DAICFwwC</data>
+					<key>WakeVerbReinit</key>
+					<true/>
+				</dict>
+				<dict>
+					<key>AFGLowPowerState</key>
+					<data>AwAAAA==</data>
+					<key>CodecID</key>
+					<integer>283902597</integer>
+					<key>CodecName</key>
+					<string>GU603ZM ALC285 layout 96, single main speaker</string>
+					<key>ConfigData</key>
+					<data>AScccAEnHQEBJx6mAScfkAE3HPABNx0AATceAAE3H0ABRxxAAUcdAQFHHhcBRx+QAUcMAgFnHPABZx0AAWceAAFnH0ABdxxBAXcdAQF3HhcBdx+QAYcc8AGHHQABhx4AAYcfQAGXHCABlx0QAZceiwGXHwIBpxzwAacdAAGnHgABpx9AAbcc8AG3HQABtx4AAbcfQAG3DAIB1xzwAdcdAAHXHgAB1x9AAecc8AHnHQAB5x4AAecfQAIXHDACFx0QAhceIQIXHwMCFwwC</data>
+					<key>FuncGroup</key>
+					<integer>1</integer>
+					<key>LayoutID</key>
+					<integer>96</integer>
+					<key>WakeConfigData</key>
+					<data>AUcMAgG3DAICFwwC</data>
+					<key>WakeVerbReinit</key>
+					<true/>
+				</dict>
+				<dict>
+					<key>AFGLowPowerState</key>
+					<data>AwAAAA==</data>
+					<key>CodecID</key>
+					<integer>283902597</integer>
+					<key>CodecName</key>
+					<string>GU603ZM ALC285 layout 97, mirrored shared DAC speaker path</string>
+					<key>ConfigData</key>
+					<data>AScccAEnHQEBJx6mAScfkAE3HPABNx0AATceAAE3H0ABRxxAAUcdAQFHHhcBRx+QAUcMAgFnHPABZx0AAWceAAFnH0ABdxxBAXcdAQF3HhcBdx+QAYcc8AGHHQABhx4AAYcfQAGXHCABlx0QAZceiwGXHwIBpxzwAacdAAGnHgABpx9AAbcc8AG3HQABtx4AAbcfQAG3DAIB1xzwAdcdAAHXHgAB1x9AAecc8AHnHQAB5x4AAecfQAIXHDACFx0QAhceIQIXHwMCFwwCAgUAEAIEACA=</data>
+					<key>FuncGroup</key>
+					<integer>1</integer>
+					<key>LayoutID</key>
+					<integer>97</integer>
+					<key>WakeConfigData</key>
+					<data>AUcMAgG3DAICFwwCAgUAEAIEACA=</data>
+					<key>WakeVerbReinit</key>
+					<true/>
+				</dict>
 			</array>
 			<key>IOClass</key>
 			<string>AppleALC</string>

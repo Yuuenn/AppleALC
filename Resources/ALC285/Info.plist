@@ -84,6 +84,46 @@
 				<key>Path</key>
 				<string>layout88.xml.zlib</string>
 			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>GU603ZM minimal four-channel DSP</string>
+				<key>Id</key>
+				<integer>93</integer>
+				<key>Path</key>
+				<string>layout93.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>GU603ZM firmware headphone pin</string>
+				<key>Id</key>
+				<integer>94</integer>
+				<key>Path</key>
+				<string>layout94.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>GU603ZM shared stereo speaker DAC</string>
+				<key>Id</key>
+				<integer>95</integer>
+				<key>Path</key>
+				<string>layout95.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>GU603ZM single main speaker</string>
+				<key>Id</key>
+				<integer>96</integer>
+				<key>Path</key>
+				<string>layout96.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>GU603ZM mirrored shared DAC speaker path</string>
+				<key>Id</key>
+				<integer>97</integer>
+				<key>Path</key>
+				<string>layout97.xml.zlib</string>
+			</dict>
 		</array>
 		<key>Platforms</key>
 		<array>
@@ -158,6 +198,46 @@
 				<integer>88</integer>
 				<key>Path</key>
 				<string>Platforms88.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>GU603ZM contiguous four-channel map</string>
+				<key>Id</key>
+				<integer>93</integer>
+				<key>Path</key>
+				<string>Platforms93.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>GU603ZM baseline speaker map</string>
+				<key>Id</key>
+				<integer>94</integer>
+				<key>Path</key>
+				<string>Platforms93.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>GU603ZM shared stereo speaker map</string>
+				<key>Id</key>
+				<integer>95</integer>
+				<key>Path</key>
+				<string>Platforms95.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>GU603ZM main speaker stereo map</string>
+				<key>Id</key>
+				<integer>96</integer>
+				<key>Path</key>
+				<string>Platforms96.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>GU603ZM mirrored shared DAC speaker map</string>
+				<key>Id</key>
+				<integer>97</integer>
+				<key>Path</key>
+				<string>Platforms97.xml.zlib</string>
 			</dict>
 		</array>
 	</dict>

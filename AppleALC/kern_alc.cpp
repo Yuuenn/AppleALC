@@ -382,6 +382,27 @@ bool AlcEnabler::AppleHDAController_start(IOService* service, IOService* provide
 	return FunctionCast(AppleHDAController_start, callbackAlc->orgAppleHDAController_start)(service, provider);
 }
 
+#ifdef HAVE_ANALOG_AUDIO
+static bool isGU603ZMSpeakerCodec(IOService *codec) {
+	if (!codec || getKernelVersion() != KernelVersion::Tahoe)
+		return false;
+	auto vendor = OSDynamicCast(OSNumber, codec->getProperty("IOHDACodecVendorID"));
+	if (!vendor || vendor->unsigned32BitValue() != 0x10EC0285)
+		return false;
+	for (auto parent = codec->getParentEntry(gIOServicePlane); parent;
+			parent = parent->getParentEntry(gIOServicePlane)) {
+		if (strcmp(safeString(parent->getName()), "HDEF"))
+			continue;
+		uint32_t layout = 0, controller = 0, subvendor = 0, subsystem = 0;
+		return WIOKit::getOSDataValue(parent, "alc-layout-id", layout) && layout == 97 &&
+			WIOKit::getOSDataValue(parent, "device-id", controller) && controller == 0x51C8 &&
+			WIOKit::getOSDataValue(parent, "subsystem-vendor-id", subvendor) && subvendor == 0x1043 &&
+			WIOKit::getOSDataValue(parent, "subsystem-id", subsystem) && subsystem == 0x1C62;
+	}
+	return false;
+}
+#endif
+
 IOReturn AlcEnabler::IOHDACodecDevice_executeVerb(void *hdaCodecDevice, uint16_t nid, uint16_t verb, uint16_t param, unsigned int *output, bool waitForSuccess)
 {
 	if (verb & 0xff0) {
@@ -391,7 +412,56 @@ IOReturn AlcEnabler::IOHDACodecDevice_executeVerb(void *hdaCodecDevice, uint16_t
 		// 4 bit verb
 		DBGLOG("alc", "IOHDACodecDevice::executeVerb with parameters nid = 0x%02X, verb = 0x%X, param = 0x%04X", nid, verb, param);
 	}
-	return FunctionCast(IOHDACodecDevice_executeVerb, callbackAlc->orgIOHDACodecDevice_executeVerb)(hdaCodecDevice, nid, verb, param, output, waitForSuccess);
+	auto execute = FunctionCast(IOHDACodecDevice_executeVerb, callbackAlc->orgIOHDACodecDevice_executeVerb);
+	auto ret = execute(hdaCodecDevice, nid, verb, param, output, waitForSuccess);
+
+#ifdef HAVE_ANALOG_AUDIO
+	/*
+	 * GU603ZM ALC285 has two physical speaker pins fed by DAC 0x02.
+	 * AppleHDA creates a second converter path when both pins are described
+	 * as independent software paths. Layout 97 keeps pin 0x17 as the sole
+	 * speaker path and mirrors its hardware control writes to pin 0x14.
+	 */
+	constexpr uint16_t bass = 0x17, main = 0x14;
+	constexpr uint16_t pinControl = 0x707, power = 0x705, setAmp = 0x3;
+	bool pinWrite = verb == pinControl || verb == power ||
+		(verb == setAmp && (param & 0x8000));
+	if (ret == kIOReturnSuccess && nid == bass && pinWrite &&
+			isGU603ZMSpeakerCodec(static_cast<IOService *>(hdaCodecDevice))) {
+		auto codec = static_cast<IOService *>(hdaCodecDevice);
+		unsigned int response = 0;
+		IOReturn mirror = kIOReturnSuccess;
+		auto send = [&](uint16_t node, uint16_t command, uint16_t value) {
+			if (mirror == kIOReturnSuccess)
+				mirror = execute(hdaCodecDevice, node, command, value, &response, true);
+		};
+		if (verb == pinControl && (param & 0x40)) {
+			send(main, 0xF00, 0x0E);
+			if (mirror == kIOReturnSuccess && (response & 0xff) != 1)
+				mirror = kIOReturnUnsupported;
+			send(main, 0xF02, 0);
+			if (mirror == kIOReturnSuccess && (response & 0xff) != 0x02)
+				mirror = kIOReturnUnsupported;
+			send(bass, 0xF01, 0);
+			if (mirror == kIOReturnSuccess && response != 0)
+				mirror = kIOReturnUnsupported;
+			send(main, power, 0);
+			send(main, 0x701, 0);
+			send(main, 0x70C, 2);
+			for (unsigned channel = 0; channel < 2; channel++) {
+				send(bass, 0xB, channel ? 0x8000 : 0xA000);
+				send(main, setAmp, (channel ? 0x9000 : 0xA000) | (response & 0x80));
+			}
+		}
+		// Both pins have a mute-only output amp; keep the main pin at fixed gain.
+		send(main, verb, verb == setAmp ? (param & 0xFF80) : param);
+		if (verb == pinControl || mirror != kIOReturnSuccess)
+			codec->setProperty("GU603ZMSharedDACLastStatus", static_cast<uint32_t>(mirror), 32);
+		if (verb == pinControl && mirror == kIOReturnSuccess)
+			codec->setProperty("GU603ZMSharedDACOutputEnabled", (param & 0x40) ? kOSBooleanTrue : kOSBooleanFalse);
+	}
+#endif
+	return ret;
 }
 
 uint32_t AlcEnabler::getAudioLayout(IOService *hdaDriver) {
